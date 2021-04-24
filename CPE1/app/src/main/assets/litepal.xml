@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!--<dbname>标签指定数据库名称-->
+<!--<version>标签指定数据库版本号-->
+<!--<list>标签指定所有的映射模型-->
+<litepal>
+
+    <dbname value="CPE"></dbname>
+
+    <version value="19"></version>
+
+    <list>
+        <mapping class="db.log.HeartbeatLog"></mapping> //心跳表
+        <mapping class="db.log.RunningLog"></mapping> //日志表
+        <mapping class="db.agreement.InitCpe"></mapping> //戴天初始化信息表
+    </list>
+
+</litepal>

@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+    defaultConfig {
+        applicationId "com.communication.yang.cpe_1"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //添加如下配置就OK了
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+
+
+    buildTypes {
+        release {
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        sourceSets {
+            main { jni.srcDirs = [] }
+        }
+    }
+}
+
+//1，加入对MAVEN仓库依赖引入的支持
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+dependencies {
+    implementation 'com.hjq:xxpermissions:5.2'
+    //lombok库的依赖
+    implementation 'org.projectlombok:lombok:1.16.8' //添加lombok依赖
+    implementation 'org.glassfish:javax.annotation:10.0-b28' //java注解
+    //GSON库的依赖
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //LitePal框架的依赖
+    implementation 'org.litepal.guolindev:core:3.1.1'
+    //OKHTTP库的依赖
+    implementation("com.squareup.okhttp3:okhttp:4.8.0")
+    //MQTT服务依赖
+    implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation files('libs\\commons-lang3-3.1.jar')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
